@@ -1,0 +1,131 @@
+/* --- SETUP & VARIABLES --- */
+$breakpoint-tablet: 768px;
+
+/* --- NAVBAR STYLES --- */
+.navbar {
+  width: 100%;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #eaeaea;
+  background-color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 2.4rem; // 24px
+  font-weight: 700;
+  text-decoration: none;
+  color: #111;
+}
+
+/* --- DESKTOP NAVIGATION --- */
+.desktopNavLinks {
+  display: flex;
+  gap: 3rem; // 30px
+
+  a {
+    font-size: 1.6rem; // 16px
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #0070f3;
+    }
+  }
+
+  // Hide on mobile
+  @media (max-width: $breakpoint-tablet) {
+    display: none;
+  }
+}
+
+/* --- ACTIONS (CART, USER, HAMBURGER) --- */
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 2rem; // 20px
+}
+
+.actionButton {
+  position: relative;
+  font-size: 1.8rem; // 18px
+  color: #333;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #0070f3;
+  }
+}
+
+.desktopOnly {
+  @media (max-width: $breakpoint-tablet) {
+    display: none;
+  }
+}
+
+.cartCount {
+  position: absolute;
+  top: -0.8rem;
+  right: -1rem;
+  background-color: #0070f3;
+  color: white;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+/* --- HAMBURGER & MOBILE MENU --- */
+.hamburgerButton {
+  display: none; // Hidden by default
+  font-size: 2.2rem;
+  color: #333;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001; // Keep it on top of other content
+
+  @media (max-width: $breakpoint-tablet) {
+    display: block; // Show on mobile
+  }
+}
+
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  left: -100%; // Start off-screen
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  transition: left 0.3s ease-in-out;
+  z-index: 1000;
+
+  &.isOpen {
+    left: 0; // Slide in when open
+  }
+
+  a {
+    font-size: 2.4rem;
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+  }
+}
