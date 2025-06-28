@@ -1,10 +1,18 @@
+"use client"
+import { useState } from 'react';
 import Link from 'next/link';
 import Container from '../Container/Container';
 import styles from './Navbar.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faUser, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <nav className={styles.navbar}>
       <Container>
@@ -12,22 +20,38 @@ const Navbar = () => {
           <Link href="/" className={styles.logo}>
             WarungIndo
           </Link>
-          <div className={styles.navLinks}>
+
+          {/* Desktop Navigation */}
+          <div className={styles.desktopNavLinks}>
             <Link href="/products">All Products</Link>
             <Link href="/about">About</Link>
             <Link href="/contact">Contact</Link>
           </div>
+
           <div className={styles.navActions}>
             <Link href="/cart" className={styles.actionButton}>
               <FontAwesomeIcon icon={faShoppingCart} />
               <span className={styles.cartCount}>0</span>
             </Link>
-            <Link href="/login" className={styles.actionButton}>
+            <Link href="/login" className={`${styles.actionButton} ${styles.desktopOnly}`}>
               <FontAwesomeIcon icon={faUser} />
             </Link>
+
+            {/* Hamburger Menu Button */}
+            <button className={styles.hamburgerButton} onClick={toggleMenu}>
+              <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
+            </button>
           </div>
         </div>
       </Container>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.isOpen : ''}`}>
+        <Link href="/products" onClick={toggleMenu}>All Products</Link>
+        <Link href="/about" onClick={toggleMenu}>About</Link>
+        <Link href="/contact" onClick={toggleMenu}>Contact</Link>
+        <Link href="/login" onClick={toggleMenu}>Login / Account</Link>
+      </div>
     </nav>
   );
 };
