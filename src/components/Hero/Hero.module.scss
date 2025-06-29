@@ -1,0 +1,71 @@
+/*
+Author: Wanda Azhar
+Location: Twin Falls, ID. USA
+Contact: wandaazhar@gmail.com
+Description: A responsive web online-store warungindomichigan.com built with NextJs, React, TypeScript, SASS, and Firebase. Manage products, transactions, authentications, and more...
+*/
+
+/* --- SETUP & VARIABLES --- */
+$breakpoint-tablet: 768px;
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 70vh; // Takes up 70% of the viewport height
+  min-height: 40rem;
+  display: flex;
+  align-items: center;
+  color: white;
+  background-color: #333; // Fallback color
+
+  // You can replace this with your own image later
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1587313439340-9b341de2a8e3?q=80&w=2070');
+  background-size: cover;
+  background-position: center;
+}
+
+.heroContent {
+  max-width: 65rem; // Constrain the width of the text content
+}
+
+.title {
+  font-size: 5.6rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 4rem;
+  }
+}
+
+.subtitle {
+  font-size: 2rem;
+  max-width: 55rem;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  opacity: 0.9;
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 1.8rem;
+  }
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: white;
+  color: #111;
+  padding: 1.5rem 3rem;
+  border-radius: 0.8rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+}
