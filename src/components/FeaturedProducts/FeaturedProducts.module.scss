@@ -1,0 +1,38 @@
+/*
+Author: Wanda Azhar
+Location: Twin Falls, ID. USA
+Contact: wandaazhar@gmail.com
+Description: A responsive web online-store warungindomichigan.com built with NextJs, React, TypeScript, SASS, and Firebase. Manage products, transactions, authentications, and more...
+*/
+
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 480px;
+
+.featuredSection {
+  padding: 6rem 0;
+}
+
+.title {
+  font-size: 3.2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    grid-template-columns: 1fr;
+  }
+}
