@@ -1,0 +1,87 @@
+/*
+Author: Wanda Azhar
+Location: Twin Falls, ID. USA
+Contact: wandaazhar@gmail.com
+Description: A responsive web online-store warungindomichigan.com built with NextJs, React, TypeScript, SASS, and Firebase. Manage products, transactions, authentications, and more...
+*/
+
+$breakpoint-tablet: 768px;
+
+.card {
+  background-color: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+  }
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; // Creates a square aspect ratio
+  display: block;
+}
+
+.cardContent {
+  padding: 1.5rem;
+}
+
+.category {
+  font-size: 1.2rem;
+  color: #666;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.title {
+  font-size: 1.8rem;
+  margin: 0.5rem 0 1.5rem 0;
+  font-weight: 600;
+  line-height: 1.4;
+
+  a {
+    text-decoration: none;
+    color: #111;
+
+    &:hover {
+      color: #0070f3;
+    }
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.addToCartBtn {
+  background-color: #f0f0f0;
+  color: #333;
+  border: none;
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover {
+    background-color: #0070f3;
+    color: white;
+  }
+}
