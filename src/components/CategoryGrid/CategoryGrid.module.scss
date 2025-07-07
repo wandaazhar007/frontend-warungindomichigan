@@ -1,0 +1,49 @@
+.categorySection {
+  padding: 6rem 0;
+  background-color: #f7f7f7; // A light grey background to separate it
+}
+
+.title {
+  font-size: 3.2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 4rem;
+  color: #111;
+}
+
+.grid {
+  display: grid;
+  // This creates the 3-column layout that will not change on mobile
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.categoryCard {
+  background-color: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 1.2rem;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.08);
+  }
+}
+
+.icon {
+  font-size: 3.2rem;
+  color: #0070f3;
+}
+
+.name {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333;
+}
