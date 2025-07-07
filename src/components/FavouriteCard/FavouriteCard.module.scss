@@ -1,0 +1,51 @@
+.card {
+  background-color: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0; // Important for the carousel
+  width: 19rem; // Fixed width for each card
+  // border-color: 9rem solid salmon;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; // Aspect ratio for the image
+  display: block;
+}
+
+.cardContent {
+  padding: 1.5rem;
+  text-align: left;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #111;
+  margin: 0 0 0.5rem 0;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.price {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #0052cc; // Blue color from the design
+  margin: 0 0 0.5rem 0;
+}
+
+.category {
+  font-size: 1.4rem;
+  color: #666;
+  margin-top: auto; // Pushes the category to the bottom
+}
