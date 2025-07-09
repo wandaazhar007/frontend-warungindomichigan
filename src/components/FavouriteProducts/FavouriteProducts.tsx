@@ -90,9 +90,9 @@ const FavouriteProducts = () => {
             <button onClick={() => handleScroll('right')} className={styles.scrollButton} disabled={!canScrollRight}>
               <FontAwesomeIcon icon={faChevronRight} />
             </button>
-            <Link href="/products" className={styles.viewAllButton}>
+            {/* <Link href="/products" className={styles.viewAllButton}>
               Lihat Semua
-            </Link>
+            </Link> */}
           </div>
         </header>
       </Container>
