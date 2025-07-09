@@ -25,7 +25,7 @@ const CategoryGrid = () => {
   return (
     <section className={styles.categorySection}>
       <Container>
-        <h2 className={styles.title}>Kategori Menu</h2>
+        {/* <h2 className={styles.title}>Category Products</h2> */}
         <div className={styles.grid}>
           {categories.map((category) => (
             <Link href={category.href} key={category.name} className={styles.categoryCard}>

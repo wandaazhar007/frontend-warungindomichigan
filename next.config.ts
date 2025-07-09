@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    domains: ['localhost', 'portfolio.birojasa-sahabat.com'], // <== Domain name
+    domains: ['localhost', 'images.pexels.com', 'i.imgur.com'], // <== Domain name
     remotePatterns: [
       {
         protocol: 'https',

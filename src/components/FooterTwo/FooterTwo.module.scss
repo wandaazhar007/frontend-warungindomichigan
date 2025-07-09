@@ -1,0 +1,125 @@
+$breakpoint-tablet: 768px;
+
+.footer {
+  background-color: #f9f9f9;
+  border-top: 1px solid #eaeaea;
+  padding: 4rem 0;
+  color: #666;
+  font-size: 1.4rem;
+}
+
+.topFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3rem;
+
+  @media (max-width: $breakpoint-tablet) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.infoBlock {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  @media (max-width: $breakpoint-tablet) {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+.infoIcon {
+  font-size: 2.4rem;
+  color: #0070f3;
+}
+
+.infoText {
+  h4 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 0.2rem 0;
+  }
+
+  a {
+    color: #0070f3;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.socialBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.5rem;
+
+  @media (max-width: $breakpoint-tablet) {
+    align-items: center;
+  }
+}
+
+.appStores {
+  display: flex;
+  gap: 1rem;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 2rem;
+
+  a {
+    color: #333;
+    font-size: 2rem;
+
+    &:hover {
+      color: #0070f3;
+    }
+  }
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #eaeaea;
+  margin: 4rem 0;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3rem;
+  margin-bottom: 4rem;
+
+  a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.legal {
+  text-align: center;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 80rem;
+  margin: 0 auto;
+
+  p:first-child {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+}

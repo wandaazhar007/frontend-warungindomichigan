@@ -1,0 +1,82 @@
+$breakpoint-desktop: 1024px;
+
+.promoSection {
+  padding: 6rem 0;
+}
+
+.gridContainer {
+  display: grid;
+  gap: 2rem;
+
+  // --- MOBILE LAYOUT (Default) ---
+  // A single column where all items stack vertically
+  grid-template-columns: repeat(2, 1fr); // Single column
+  grid-template-rows: repeat(3, auto); // Three rows
+  grid-template-areas:
+    "large large"
+    "smallTop smallBottom"
+    "banner banner";
+
+  // --- DESKTOP LAYOUT ---
+  @media (min-width: $breakpoint-desktop) {
+    grid-template-columns: repeat(4, 1fr); // Two columns, first is twice as wide
+    grid-template-rows: repeat(2, 1fr); // Two rows
+    grid-template-areas:
+      "large large smallTop smallBottom"
+      "large large banner banner";
+  }
+}
+
+.gridItem {
+  position: relative;
+  width: 100%;
+  min-height: 25rem;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  background-color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-color: .3rem solid salmon;
+}
+
+// Assign grid areas to each item
+.largeItem {
+  grid-area: large;
+  border-color: .3rem solid salmon;
+}
+
+.smallItemTop {
+  grid-area: smallTop;
+}
+
+.smallItemBottom {
+  grid-area: smallBottom;
+}
+
+.bannerItem {
+  grid-area: banner;
+}
+
+.promoImage {
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+
+  .gridItem:hover & {
+    transform: scale(1.05);
+  }
+}
+
+.promoText {
+  font-size: 5rem;
+  color: white;
+  font-weight: 800;
+  text-align: center;
+  text-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 2;
+}
+
+.bannerText {
+  font-size: 8rem;
+}
