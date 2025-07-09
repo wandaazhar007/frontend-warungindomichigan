@@ -1,0 +1,50 @@
+// We use the same styles as the Terms page for consistency.
+.privacyPage {
+  padding: 6rem 0;
+  background-color: #fff;
+  color: #333;
+}
+
+.content {
+  max-width: 85rem; // Constrain the width for readability
+  margin: 0 auto;
+  font-size: 1.6rem;
+  line-height: 1.8;
+
+  h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  h2 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    margin-bottom: 2rem;
+    color: #666;
+  }
+
+  .intro {
+    font-size: 1.8rem;
+    color: #333;
+    font-weight: 500;
+  }
+
+  ul {
+    list-style-position: inside;
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+
+    li {
+      margin-bottom: 1rem;
+      color: #666;
+    }
+  }
+}
