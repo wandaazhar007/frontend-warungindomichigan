@@ -1,0 +1,120 @@
+$breakpoint-tablet: 768px;
+
+.aboutPage {
+  background-color: #fff;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 40rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.heroImageContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0 0 50% 50% / 0 0 20% 20%; // Creates the curve effect
+  overflow: hidden;
+}
+
+.heroImage {
+  object-fit: cover;
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  // background-color: #111;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+  border-radius: 0 0 50% 50% / 0 0 20% 20%;
+  // border-radius: inherit;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  color: white;
+
+  h1 {
+    font-size: 5.6rem;
+    font-weight: 800;
+  }
+}
+
+.mainContent {
+  padding: 6rem 0;
+  max-width: 90rem;
+  margin: 0 auto;
+
+  h2 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 2rem;
+  }
+
+  p {
+    font-size: 1.8rem;
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.missionSection {
+  margin-top: 5rem;
+}
+
+.teamSection {
+  padding: 4rem 0;
+  text-align: center;
+  background-color: #f7f7f7;
+
+  h2 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin-bottom: 4rem;
+  }
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 3rem;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.teamMember {
+  h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 1.6rem;
+    color: #666;
+  }
+}
+
+.memberImage {
+  position: relative;
+  width: 15rem;
+  height: 15rem;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
