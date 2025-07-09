@@ -4,35 +4,45 @@ Location: Twin Falls, ID. USA
 Contact: wandaazhar@gmail.com
 Description: A responsive web online-store warungindomichigan.com built with NextJs, React, TypeScript, SASS, and Firebase. Manage products, transactions, authentications, and more...
 */
-
-$breakpoint-tablet: 768px;
-$breakpoint-mobile: 480px;
-
 .featuredSection {
   padding: 6rem 0;
+  background-color: #f7f7f7;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
 }
 
 .title {
   font-size: 3.2rem;
   font-weight: 700;
-  text-align: center;
-  margin-bottom: 4rem;
+  color: #111;
+}
+
+.viewAllButton {
+  background-color: #4a3aff;
+  color: white;
+  padding: 1.2rem 2.4rem;
+  border-radius: 0.8rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.6rem;
 }
 
 .grid {
+  margin-top: 4rem;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 3rem;
+  gap: 2rem;
 
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  // --- THIS IS THE FIX ---
+  // Mobile-first: Default to 2 columns as you requested.
+  grid-template-columns: repeat(2, 1fr);
 
-  @media (max-width: $breakpoint-tablet) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: $breakpoint-mobile) {
-    grid-template-columns: 1fr;
+  // Tablet and larger: Switch to 4 columns.
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4, 1fr);
   }
 }

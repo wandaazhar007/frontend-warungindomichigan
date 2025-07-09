@@ -96,18 +96,19 @@ const FavouriteProducts = () => {
           </div>
         </header>
       </Container>
-
-      <div className={styles.carouselContainer}>
-        {loading ? (
-          <p>Loading favourites...</p>
-        ) : (
-          <div className={styles.carouselTrack} ref={trackRef}>
-            {products.map((product) => (
-              <FavouriteCard key={product.id} product={product} />
-            ))}
-          </div>
-        )}
-      </div>
+      <Container>
+        <div className={styles.carouselContainer}>
+          {loading ? (
+            <p>Loading favourites...</p>
+          ) : (
+            <div className={styles.carouselTrack} ref={trackRef}>
+              {products.map((product) => (
+                <FavouriteCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
+        </div>
+      </Container>
     </section>
   );
 };
