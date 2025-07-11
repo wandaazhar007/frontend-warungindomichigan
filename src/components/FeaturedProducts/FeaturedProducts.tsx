@@ -22,7 +22,7 @@ const FeaturedProducts = () => {
     const fetchProducts = async () => {
       try {
         // Fetch products from your backend API
-        const res = await fetch('http://192.168.0.52:8080/api/products');
+        const res = await fetch(`${process.env.NEXT_PUBLIC_ALL_PRODUCTS_API_URL}`);
         const data = await res.json();
         // Take the first 4 products as featured items
         setProducts(data.data.products.slice(0, 4));

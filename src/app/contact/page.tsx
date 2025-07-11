@@ -29,7 +29,8 @@ const ContactPage = () => {
     }
     setIsLoading(true);
     try {
-      const response = await axios.post('http://192.168.0.52:8080/api/contact', formData);
+      // const response = await axios.post('http://192.168.0.52:8080/api/contact', formData);
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_CONTACT_API_URL}`, formData);
       toast.success(response.data.message);
       setFormData({ name: '', email: '', phone: '', message: '' });
     } catch (error: any) {
@@ -41,6 +42,7 @@ const ContactPage = () => {
 
   const address = '3710 Green Brier Blvd Apt 370C, Ann Arbor, MI 48105';
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+  const mapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
   return (
     <div className={styles.contactPage}>
@@ -96,7 +98,7 @@ const ContactPage = () => {
             </div>
             <div className={styles.mapContainer}>
               <iframe
-                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDj_riTlkMxO--MRBttKN5IATb8hFy_BkI&q=${encodeURIComponent(address)}`}
+                src={`https://www.google.com/maps/embed/v1/place?key=${mapsApiKey}&q=${encodeURIComponent(address)}`}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

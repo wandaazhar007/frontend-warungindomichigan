@@ -29,7 +29,7 @@ const FavouriteProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch('http://192.168.0.52:8080/api/products');
+        const res = await fetch(`${process.env.NEXT_PUBLIC_ALL_PRODUCTS_API_URL}`);
         const data = await res.json();
         setProducts(data.data.products);
       } catch (error) {
