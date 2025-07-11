@@ -1,0 +1,133 @@
+$breakpoint-desktop: 1024px;
+
+.contactPage {
+  padding: 6rem 0;
+}
+
+.contentWrapper {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 5rem;
+
+  @media (max-width: $breakpoint-desktop) {
+    grid-template-columns: 1fr;
+    gap: 6rem;
+  }
+}
+
+.formSection {
+  h2 {
+    font-size: 3.6rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  >p {
+    font-size: 1.8rem;
+    color: #666;
+    margin-bottom: 3rem;
+  }
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
+  label {
+    font-weight: 600;
+    font-size: 1.4rem;
+  }
+
+  input,
+  textarea {
+    font-size: 1.6rem;
+    padding: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 0.8rem;
+    font-family: inherit;
+    background-color: #fff; // Ensure background is white
+    color: #111; // Ensure text is dark
+
+    &:focus {
+      outline: none;
+      border-color: #0070f3;
+      box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+  }
+}
+
+.submitButton {
+  background-color: #111;
+  color: white;
+  border: none;
+  padding: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #333;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+.infoSection {
+  h3 {
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.infoItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+
+  h4 {
+    font-size: 1.6rem;
+    margin: 0 0 0.3rem 0;
+    color: #111;
+  }
+
+  a {
+    color: #666;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.icon {
+  font-size: 2rem;
+  color: #0070f3;
+  margin-top: 0.3rem;
+}
+
+.mapContainer {
+  width: 100%;
+  height: 25rem;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  margin-top: 2rem;
+  border: 1px solid #eaeaea;
+}
