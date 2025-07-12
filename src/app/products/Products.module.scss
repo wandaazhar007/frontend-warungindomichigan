@@ -1,0 +1,54 @@
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+
+.productsPage {
+  padding: 4rem 0;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+
+  h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+}
+
+.searchContainer {
+  max-width: 50rem;
+  margin: 0 auto;
+}
+
+.searchInput {
+  width: 100%;
+  font-size: 1.6rem;
+  padding: 1.2rem 2rem;
+  border: 1px solid #ddd;
+  border-radius: 0.8rem;
+
+  &:focus {
+    outline: none;
+    border-color: #0070f3;
+    box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
+  }
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+
+  // Mobile-first: Default to 2 columns as you requested
+  grid-template-columns: repeat(2, 1fr);
+
+  // Tablet: Switch to 3 columns
+  @media (min-width: $breakpoint-tablet) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  // Desktop: Switch to 4 columns
+  @media (min-width: $breakpoint-desktop) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
