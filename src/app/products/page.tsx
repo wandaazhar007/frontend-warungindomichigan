@@ -4,11 +4,10 @@ import { useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Container from '@/components/Container/Container';
 import ProductCard from '@/components/ProductCard/ProductCard';
-// import { useDebounce } from '@/hooks/useDebounce';
-import { useDebounce } from '@/hooks/useDebounce'; // Ensure this hook is implemented in your project
+import SkeletonCard from '@/components/SkeletonCard/SkeletonCard';
+import { useDebounce } from '@/hooks/useDebounce';
 import styles from './Products.module.scss';
 
-// Simplified Product type for the page
 interface Product {
   id: string;
   name: string;
@@ -17,8 +16,6 @@ interface Product {
   category: string;
 }
 
-// This is a placeholder for your actual API service
-// We will replace this with a call to your backend
 const fetchProductsFromAPI = async (lastVisible: string | null, searchTerm: string): Promise<{ products: Product[], lastVisible: string | null }> => {
   const params = new URLSearchParams();
   if (lastVisible) params.append('lastVisible', lastVisible);
@@ -35,11 +32,11 @@ const ProductsPage = () => {
   const [lastVisible, setLastVisible] = useState<string | null>(null);
 
   const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-  // Effect to handle searching
   useEffect(() => {
-    // When search term changes, reset everything and fetch new results
+    setIsLoading(true);
     setProducts([]);
     setLastVisible(null);
     setHasMore(true);
@@ -50,7 +47,8 @@ const ProductsPage = () => {
     if (!isInitialFetch && !hasMore) return;
 
     try {
-      const data = await fetchProductsFromAPI(lastVisible, debouncedSearchTerm);
+      const cursor = isInitialFetch ? null : lastVisible;
+      const data = await fetchProductsFromAPI(cursor, debouncedSearchTerm);
 
       setProducts(prevProducts => [...prevProducts, ...data.products]);
 
@@ -62,7 +60,13 @@ const ProductsPage = () => {
     } catch (error) {
       console.error("Failed to fetch products:", error);
       setHasMore(false);
+    } finally {
+      setIsLoading(false);
     }
+  };
+
+  const renderSkeletons = (count: number) => {
+    return Array.from({ length: count }).map((_, index) => <SkeletonCard key={index} />);
   };
 
   return (
@@ -82,22 +86,31 @@ const ProductsPage = () => {
           </div>
         </header>
 
-        <InfiniteScroll
-          dataLength={products.length}
-          next={fetchMoreData}
-          hasMore={hasMore}
-          loader={<h4 style={{ textAlign: 'center', margin: '2rem 0' }}>Loading more products...</h4>}
-          endMessage={
-            <p style={{ textAlign: 'center', margin: '2rem 0' }}>
-              <b>You have seen it all!</b>
-            </p>
-          }
-          className={styles.grid}
-        >
-          {products.map(product => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </InfiniteScroll>
+        {isLoading ? (
+          <div className={styles.grid}>{renderSkeletons(8)}</div>
+        ) : products.length === 0 ? (
+          <div className={styles.notFound}>
+            <h2>Product not found</h2>
+            <p>Sorry, we couldn't find any products matching your search.</p>
+          </div>
+        ) : (
+          <InfiniteScroll
+            dataLength={products.length}
+            next={fetchMoreData}
+            hasMore={hasMore}
+            loader={<div className={styles.grid} style={{ marginTop: '2rem' }}>{renderSkeletons(4)}</div>}
+            endMessage={
+              <p className={styles.endMessage}>
+                <b>You've seen it all!</b>
+              </p>
+            }
+            className={styles.grid}
+          >
+            {products.map((product, index) => (
+              <ProductCard key={`${product.id}-${index}`} product={product} />
+            ))}
+          </InfiniteScroll>
+        )}
       </Container>
     </div>
   );

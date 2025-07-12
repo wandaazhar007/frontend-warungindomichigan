@@ -1,10 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './ProductCard.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faHeart } from '@fortawesome/free-solid-svg-icons';
 
-// Simplified Product type
 interface Product {
   id: string;
   name: string;
@@ -18,23 +15,15 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  // Format price to Indonesian Rupiah style, e.g., "Rp. 18.000"
   const formattedPrice = new Intl.NumberFormat('id-ID', {
     style: 'currency',
     currency: 'IDR',
     minimumFractionDigits: 0,
-  }).format(product.price / 100); // Assuming price is in cents
+  }).format(product.price / 100);
 
   return (
     <div className={styles.card}>
-      <div className={styles.cardHeader}>
-        <button className={styles.iconButton}>
-          <FontAwesomeIcon icon={faStar} />
-        </button>
-        <button className={styles.iconButton}>
-          <FontAwesomeIcon icon={faHeart} />
-        </button>
-      </div>
+      {/* The header with the icons has been removed */}
       <Link href={`/products/${product.id}`} className={styles.imageContainer}>
         <Image
           src={product.imageUrl || '/placeholder.png'}

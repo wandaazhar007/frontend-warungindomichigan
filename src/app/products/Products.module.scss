@@ -52,3 +52,22 @@ $breakpoint-desktop: 1024px;
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+.notFound {
+  text-align: center;
+  padding: 8rem 2rem;
+  color: #666;
+
+  h2 {
+    font-size: 2.4rem;
+    color: #111;
+    margin-bottom: 1rem;
+  }
+}
+
+.endMessage {
+  text-align: center;
+  padding: 4rem 0;
+  color: #666;
+  grid-column: 1 / -1; // Ensure it spans all columns in the grid
+}

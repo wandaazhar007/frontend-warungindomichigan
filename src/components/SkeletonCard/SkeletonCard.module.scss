@@ -1,0 +1,44 @@
+@keyframes skeleton-loading {
+  0% {
+    background-color: #e0e0e0;
+  }
+
+  100% {
+    background-color: #f5f5f5;
+  }
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 1.2rem;
+  overflow: hidden;
+}
+
+.skeleton {
+  animation: skeleton-loading 1s linear infinite alternate;
+  border-radius: 0.4rem;
+}
+
+.image {
+  width: 100%;
+  padding-top: 100%;
+}
+
+.content {
+  padding: 1.5rem;
+}
+
+.title {
+  height: 2.4rem;
+  margin-bottom: 1rem;
+}
+
+.text {
+  height: 1.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.short {
+  width: 60%;
+}
