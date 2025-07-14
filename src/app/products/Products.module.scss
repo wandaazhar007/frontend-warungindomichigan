@@ -71,3 +71,47 @@ $breakpoint-desktop: 1024px;
   color: #666;
   grid-column: 1 / -1; // Ensure it spans all columns in the grid
 }
+
+.categoryFilter {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  padding-bottom: 1rem; // Space for the scrollbar
+
+  // Make it scrollable on mobile
+  overflow-x: auto;
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE and Edge
+
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari, etc.
+  }
+
+  button {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid transparent;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &.active {
+      background-color: #111;
+      color: white;
+    }
+
+    &:hover:not(.active) {
+      border-color: #ccc;
+    }
+  }
+}
+
+.notFound h2 {
+  font-size: 2.4rem;
+  color: #111;
+  margin-bottom: 1rem;
+}
