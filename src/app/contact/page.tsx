@@ -7,6 +7,7 @@ import Container from '@/components/Container/Container';
 import styles from './Contact.module.scss'; // <-- Import the SCSS module
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { API_BASE_URL } from '@/lib/config';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -30,7 +31,9 @@ const ContactPage = () => {
     setIsLoading(true);
     try {
       // const response = await axios.post('http://192.168.0.52:8080/api/contact', formData);
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_CONTACT_API_URL}`, formData);
+      // const response = await axios.post(`${process.env.NEXT_PUBLIC_CONTACT_API_URL}`, formData);
+      // toast.success(response.data.message);
+      const response = await axios.post(`${API_BASE_URL}/contact`, formData);
       toast.success(response.data.message);
       setFormData({ name: '', email: '', phone: '', message: '' });
     } catch (error: any) {
