@@ -5,6 +5,7 @@ import Footer from '@/components/Footer/Footer';
 import './globals.scss';
 import FooterTwo from '@/components/FooterTwo/FooterTwo';
 import ClientProviders from '@/components/Providers';
+import { CartProvider } from '@/context/CartContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,14 +22,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ClientProviders>
-          <Navbar />
-          <main>
-            {children}
-          </main>
-          <FooterTwo />
-          <Footer />
-        </ClientProviders>
+        <CartProvider>
+          <ClientProviders>
+            <Navbar />
+            <main>
+              {children}
+            </main>
+            <FooterTwo />
+            <Footer />
+          </ClientProviders>
+        </CartProvider>
       </body>
     </html>
   );
