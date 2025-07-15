@@ -5,9 +5,11 @@ import Container from '../Container/Container';
 import styles from './Navbar.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faUser, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { useCart } from '@/context/CartContext';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { cartCount } = useCart();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -31,7 +33,9 @@ const Navbar = () => {
           <div className={styles.navActions}>
             <Link href="/cart" className={styles.actionButton}>
               <FontAwesomeIcon icon={faShoppingCart} />
-              <span className={styles.cartCount}>0</span>
+              {cartCount > 0 && (
+                <span className={styles.cartCount}>{cartCount}</span>
+              )}
             </Link>
             <Link href="/login" className={`${styles.actionButton} ${styles.desktopOnly}`}>
               <FontAwesomeIcon icon={faUser} />

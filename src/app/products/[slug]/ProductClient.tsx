@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
 import { Product } from '@/types/product';
 import Container from '@/components/Container/Container';
+import QuantitySelector from '@/components/QuantitySelector/QuantitySelector';
 import styles from './ProductPage.module.scss';
 
 interface ProductClientProps {
@@ -17,6 +18,19 @@ const ProductClient = ({ product }: ProductClientProps) => {
 
   const handleAddToCart = () => {
     addToCart(product, quantity);
+  };
+
+  // --- NEW: Handlers for the quantity selector ---
+  const handleIncrease = () => {
+    // Prevent increasing quantity beyond available stock
+    if (quantity < product.stockQuantity) {
+      setQuantity(prev => prev + 1);
+    }
+  };
+
+  const handleDecrease = () => {
+    // Prevent decreasing quantity below 1
+    setQuantity(prev => Math.max(1, prev - 1));
   };
 
   return (
@@ -40,14 +54,10 @@ const ProductClient = ({ product }: ProductClientProps) => {
               {product.stockQuantity > 0 ? `${product.stockQuantity} in stock` : 'Out of stock'}
             </p>
             <div className={styles.actions}>
-              <input
-                type="number"
-                value={quantity}
-                onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value, 10)))}
-                min="1"
-                max={product.stockQuantity}
-                className={styles.quantityInput}
-                aria-label="Quantity"
+              <QuantitySelector
+                quantity={quantity}
+                onIncrease={handleIncrease}
+                onDecrease={handleDecrease}
               />
               <button
                 onClick={handleAddToCart}

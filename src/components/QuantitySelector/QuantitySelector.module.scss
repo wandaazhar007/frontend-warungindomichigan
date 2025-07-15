@@ -1,0 +1,31 @@
+.quantitySelector {
+  display: flex;
+  align-items: center;
+  border: 1px solid #eaeaea;
+  border-radius: 5rem; // Make it pill-shaped
+  background-color: #f9f9f9;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  color: #333;
+  font-size: 1.2rem;
+
+  &:hover {
+    color: #0070f3;
+  }
+}
+
+.quantityDisplay {
+  padding: 0 1rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  min-width: 4rem;
+  text-align: center;
+  color: #111;
+  border-left: 1px solid #eaeaea;
+  border-right: 1px solid #eaeaea;
+}
