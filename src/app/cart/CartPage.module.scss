@@ -1,0 +1,137 @@
+$breakpoint-desktop: 1024px;
+
+.cartPage {
+  padding: 4rem 0;
+
+  h1 {
+    font-size: 3.6rem;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+}
+
+.emptyCart {
+  text-align: center;
+  padding: 6rem 0;
+
+  p {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.cartGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+
+  @media (max-width: $breakpoint-desktop) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cartItem {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.itemImage {
+  position: relative;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 0.8rem;
+  overflow: hidden;
+}
+
+.itemDetails {
+  h3 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+  }
+
+  p {
+    font-size: 1.4rem;
+    color: #666;
+    margin: 0;
+  }
+}
+
+.itemActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.quantityInput {
+  width: 6rem;
+  text-align: center;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  font-size: 1.6rem;
+
+  &:hover {
+    color: #dc3545;
+  }
+}
+
+.itemTotal {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: right;
+  min-width: 8rem;
+}
+
+.cartSummary {
+  background-color: #f9f9f9;
+  padding: 2rem;
+  border-radius: 0.8rem;
+  position: sticky;
+  top: 12rem; // Adjust based on your navbar height
+
+  h2 {
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+
+  &.totalRow {
+    font-weight: 700;
+    font-size: 1.8rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eaeaea;
+  }
+}
+
+.ctaButton {
+  width: 100%;
+  background-color: #111;
+  color: white;
+  border: none;
+  padding: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  margin-top: 2rem;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
