@@ -112,6 +112,10 @@ $breakpoint-desktop: 1024px;
   justify-content: space-between;
   margin-bottom: 1rem;
 
+  span {
+    font-size: 1.4rem;
+  }
+
   &.totalRow {
     font-weight: 700;
     font-size: 1.8rem;
@@ -134,4 +138,51 @@ $breakpoint-desktop: 1024px;
   text-decoration: none;
   display: inline-block;
   text-align: center;
+}
+
+.ctaButton {
+  width: 100%;
+  background-color: #111;
+  color: white;
+  border: none;
+  padding: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  margin-top: 2rem;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  transition: background-color 0.2s;
+
+  &:disabled {
+    background-color: #666;
+    cursor: not-allowed;
+  }
+}
+
+// --- NEW STYLES ---
+.paymentMethods {
+  margin-top: 2rem;
+  text-align: center;
+
+  span {
+    font-size: 1.2rem;
+    color: #666;
+    display: block;
+    margin-bottom: 1rem;
+  }
+}
+
+.paymentIcons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  img {
+    height: 2.5rem;
+    width: auto;
+  }
 }
