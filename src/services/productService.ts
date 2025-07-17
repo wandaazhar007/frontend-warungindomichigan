@@ -1,43 +1,25 @@
 import axios from 'axios';
 import type { Product } from '@/types/product';
+import { API_BASE_URL } from '@/lib/config'; // Use the centralized base URL
 
-const API_URL = 'http://192.168.0.52:8080/api/products'; // Using your network IP
-import { API_BASE_URL } from '@/lib/config';
+// Define the single source of truth for the product API endpoint
 const PRODUCTS_API_URL = `${API_BASE_URL}/products`;
 
 // Define API response shapes for clarity
-interface ListApiResponse { data: { products: Product[], lastVisible: string | null } }
-interface SingleApiResponse { data: Product }
-
-
-// Define the shape of the API response for a list of products
 interface PaginatedProductsResponse {
   products: Product[];
   lastVisible: string | null;
 }
-
-interface ListApiResponse {
-  message: string;
-  data: PaginatedProductsResponse;
-}
-
-// Define the shape of the API response for a single product
-interface SingleProductApiResponse {
-  message: string;
-  data: Product;
-}
+interface ListApiResponse { data: PaginatedProductsResponse }
+interface SingleApiResponse { data: Product }
 
 /**
- * Fetches a single product by its ID from the backend.
- * This function will be called from our server-side page component.
+ * Fetches a single product by its ID. (Used for server-side rendering)
  */
 export const getProductById = async (id: string): Promise<Product | null> => {
   try {
-    // We use fetch directly with caching disabled. This is crucial for server components.
     const res = await fetch(`${PRODUCTS_API_URL}/${id}`, { cache: 'no-store' });
-    if (!res.ok) {
-      return null;
-    }
+    if (!res.ok) return null;
     const response: SingleApiResponse = await res.json();
     return response.data;
   } catch (error) {
@@ -47,10 +29,7 @@ export const getProductById = async (id: string): Promise<Product | null> => {
 };
 
 /**
- * Fetches a paginated list of all products.
- * @param lastVisible The cursor for pagination.
- * @param searchTerm The term to search for.
- * @param category The category to filter by.
+ * Fetches a paginated list of all products. (Used for the All Products page)
  */
 export const getProducts = async (
   lastVisible: string | null,
@@ -63,11 +42,11 @@ export const getProducts = async (
   if (category) params.append('category', category);
 
   try {
-    const response = await axios.get<ListApiResponse>(`${API_URL}?${params.toString()}`);
+    // This now correctly uses the centralized URL
+    const response = await axios.get<ListApiResponse>(`${PRODUCTS_API_URL}?${params.toString()}`);
     return response.data.data;
   } catch (error) {
     console.error('Failed to fetch products:', error);
-    // Return a default structure on error to prevent crashes
     return { products: [], lastVisible: null };
   }
 };

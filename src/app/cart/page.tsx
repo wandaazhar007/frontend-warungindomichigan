@@ -64,7 +64,10 @@ const CartPage = () => {
                 <span>Total</span>
                 <span>${(cartTotal / 100).toFixed(2)}</span>
               </div>
-              <button className={styles.ctaButton}>Proceed to Checkout</button>
+              {/* <button className={styles.ctaButton}>Proceed to Checkout</button> */}
+              <Link href="/checkout" className={styles.ctaButton}>
+                Proceed to Checkout
+              </Link>
             </div>
           </div>
         )}

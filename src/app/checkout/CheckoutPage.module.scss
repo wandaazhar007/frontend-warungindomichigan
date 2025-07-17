@@ -1,0 +1,449 @@
+// $breakpoint-desktop: 1024px;
+
+// .checkoutPage {
+//   width: 100%;
+//   min-height: 80vh;
+// }
+
+// .grid {
+//   display: grid;
+//   grid-template-columns: 1fr 0.8fr;
+//   gap: 5rem;
+
+//   @media (max-width: $breakpoint-desktop) {
+//     grid-template-columns: 1fr;
+
+//     // Reverse the order on mobile to show summary first
+//     .formContainer {
+//       order: 2;
+//     }
+
+//     .summaryContainer {
+//       order: 1;
+//       margin-bottom: 4rem;
+//     }
+//   }
+// }
+
+// .formContainer {
+//   padding-right: 5rem;
+//   border-right: 1px solid #e5e5e5;
+
+//   h2 {
+//     font-size: 2rem;
+//     font-weight: 600;
+//     margin-bottom: 2rem;
+//   }
+
+//   @media (max-width: $breakpoint-desktop) {
+//     padding-right: 0;
+//     border-right: none;
+//   }
+// }
+
+// .inputField {
+//   width: 100%;
+//   padding: 1.2rem 1.4rem;
+//   font-size: 1.6rem;
+//   border: 1px solid #ccc;
+//   border-radius: 0.6rem;
+//   margin-bottom: 1.5rem;
+// }
+
+// .nameFields,
+// .addressFields {
+//   display: grid;
+//   grid-template-columns: 1fr 1fr;
+//   gap: 1.5rem;
+// }
+
+// .addressFields {
+//   grid-template-columns: 2fr 1fr 1fr;
+// }
+
+// .submitButton {
+//   width: 100%;
+//   background-color: #111;
+//   color: white;
+//   border: none;
+//   padding: 1.5rem;
+//   font-size: 1.6rem;
+//   font-weight: 600;
+//   border-radius: 0.8rem;
+//   cursor: pointer;
+//   margin-top: 2rem;
+// }
+
+// .summaryContainer {
+//   background-color: #fafafa;
+//   padding: 2rem;
+// }
+
+// .summaryItem {
+//   display: flex;
+//   align-items: center;
+//   gap: 1.5rem;
+//   margin-bottom: 1.5rem;
+// }
+
+// .summaryItemImage {
+//   position: relative;
+
+//   img {
+//     border-radius: 0.8rem;
+//     border: 1px solid #e5e5e5;
+//   }
+// }
+
+// .summaryItemQuantity {
+//   position: absolute;
+//   top: -0.8rem;
+//   right: -0.8rem;
+//   background-color: #666;
+//   color: white;
+//   border-radius: 50%;
+//   width: 2.2rem;
+//   height: 2.2rem;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   font-size: 1.2rem;
+//   font-weight: 700;
+// }
+
+// .summaryItemDetails {
+//   flex-grow: 1;
+
+//   h4 {
+//     font-size: 1.4rem;
+//     font-weight: 600;
+//   }
+// }
+
+// .summaryItemPrice {
+//   font-size: 1.4rem;
+//   font-weight: 600;
+// }
+
+// .divider {
+//   border: none;
+//   border-top: 1px solid #e5e5e5;
+//   margin: 1.5rem 0;
+// }
+
+// .summaryRow {
+//   display: flex;
+//   justify-content: space-between;
+//   margin-bottom: 1rem;
+//   font-size: 1.4rem;
+//   color: #666;
+// }
+
+// .totalRow {
+//   font-size: 1.8rem;
+//   font-weight: 700;
+//   color: #111;
+//   padding-top: 1.5rem;
+// }
+
+// .emptyCartMessage {
+//   text-align: center;
+//   padding: 10rem 2rem;
+
+//   h2 {
+//     font-size: 2.4rem;
+//     margin-bottom: 1rem;
+//   }
+
+//   p {
+//     font-size: 1.6rem;
+//     color: #666;
+//   }
+// }
+
+// .sectionDivider {
+//   border: none;
+//   border-top: 1px solid #e5e5e5;
+//   margin: 4rem 0 2rem 0;
+// }
+
+// .shippingSection,
+// .paymentSection {
+//   h2 {
+//     font-size: 2rem;
+//     font-weight: 600;
+//     margin-bottom: 2rem;
+//   }
+// }
+
+// .rateLabel {
+//   display: flex;
+//   align-items: center;
+//   padding: 1.5rem;
+//   border: 1px solid #ccc;
+//   border-radius: 0.6rem;
+//   margin-bottom: 1rem;
+//   cursor: pointer;
+
+//   input[type="radio"] {
+//     margin-right: 1.5rem;
+//     width: 1.8rem;
+//     height: 1.8rem;
+//   }
+// }
+
+// .rateDetails {
+//   flex-grow: 1;
+
+//   span {
+//     font-weight: 600;
+//   }
+
+//   small {
+//     display: block;
+//     color: #666;
+//   }
+// }
+
+// .ratePrice {
+//   font-size: 1.6rem;
+//   font-weight: 700;
+// }
+
+// .paymentPlaceholder {
+//   border: 1px dashed #ccc;
+//   padding: 4rem;
+//   text-align: center;
+//   color: #999;
+//   border-radius: 0.6rem;
+//   margin-top: 2rem;
+// }
+
+
+
+
+
+$breakpoint-desktop: 1024px;
+$error-color: #d93a3a;
+
+.checkoutPage {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+  min-height: 100vh;
+
+  @media (max-width: $breakpoint-desktop) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mainContent {
+  padding: 4rem 6rem;
+  border-right: 1px solid #e1e1e1;
+
+  @media (max-width: $breakpoint-desktop) {
+    padding: 2rem;
+    order: 2;
+  }
+}
+
+.summaryContainer {
+  background-color: #fafafa;
+  padding: 4rem 6rem;
+
+  @media (max-width: $breakpoint-desktop) {
+    padding: 2rem;
+    order: 1;
+    border-bottom: 1px solid #e1e1e1;
+  }
+}
+
+.logo {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 3rem;
+
+  a {
+    color: #0070f3;
+    text-decoration: none;
+  }
+
+  .active {
+    font-weight: 600;
+    color: #111;
+  }
+
+  svg {
+    font-size: 0.8rem;
+  }
+}
+
+.contactLogin {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  .sectionTitle {
+    font-size: 1.8rem;
+    margin: 0;
+  }
+
+  .loginLink {
+    font-size: 1.4rem;
+  }
+}
+
+.formHeading {
+  font-size: 1.8rem;
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.inputGroup {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.inputField,
+select.inputField {
+  width: 100%;
+  padding: 1.4rem;
+  font-size: 1.4rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 0.6rem;
+  background-color: #fff;
+}
+
+.errorInput {
+  border-color: $error-color;
+}
+
+.errorMessage {
+  color: $error-color;
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.nameFields,
+.addressFields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.addressFields {
+  grid-template-columns: 2fr 1fr 1fr;
+}
+
+.formFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.returnLink {
+  color: #0070f3;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
+.submitButton {
+  background-color: #111;
+  color: white;
+  border: none;
+  padding: 1.5rem 2.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  border-radius: 0.8rem;
+  cursor: pointer;
+}
+
+// --- Summary Styles ---
+.summaryItem {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.summaryItemImage {
+  position: relative;
+
+  .summaryImage {
+    border-radius: 0.8rem;
+    border: 1px solid #e5e5e5;
+  }
+}
+
+.summaryItemQuantity {
+  position: absolute;
+  top: -0.8rem;
+  right: -0.8rem;
+  background-color: #666;
+  color: white;
+  border-radius: 50%;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.summaryItemDetails {
+  flex-grow: 1;
+
+  .itemName {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+}
+
+.summaryItemPrice {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #e5e5e5;
+  margin: 1.5rem 0;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  color: #666;
+}
+
+.totalRow {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111;
+  padding-top: 1.5rem;
+}
+
+.nameFields,
+.addressFields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.addressFields {
+  grid-template-columns: 2fr 1fr 1fr;
+  // The 'gap' property from the rule above will apply here too, fixing the margin.
+}
