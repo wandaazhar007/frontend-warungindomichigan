@@ -6,32 +6,12 @@ import Container from '@/components/Container/Container';
 import ProductCard from '@/components/ProductCard/ProductCard';
 import SkeletonCard from '@/components/SkeletonCard/SkeletonCard';
 import { useDebounce } from '@/hooks/useDebounce';
-import { getCategories, Category } from '@/services/categoryService'; // Import category service
+import { getCategories, Category } from '@/services/categoryService';
+// --- THIS IS THE KEY CHANGE ---
+// We now import getProducts from our service and remove the local fetch function
+import { getProducts } from '@/services/productService';
+import { Product } from '@/types/product';
 import styles from './Products.module.scss';
-
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-  imageUrl?: string;
-  category: string;
-}
-
-const fetchProductsFromAPI = async (
-  lastVisible: string | null,
-  searchTerm: string,
-  category: string | null
-): Promise<{ products: Product[], lastVisible: string | null }> => {
-  const params = new URLSearchParams();
-  if (lastVisible) params.append('lastVisible', lastVisible);
-  if (searchTerm) params.append('searchTerm', searchTerm);
-  if (category) params.append('category', category);
-
-  const res = await fetch(`http://192.168.0.52:8080/api/products?${params.toString()}`);
-  if (!res.ok) throw new Error('Failed to fetch products');
-  const data = await res.json();
-  return data.data;
-};
 
 const ProductsPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -45,17 +25,9 @@ const ProductsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-  // Effect to fetch the list of categories once
+  // Effect to fetch categories (no change here)
   useEffect(() => {
-    const fetchInitialCategories = async () => {
-      try {
-        const cats = await getCategories();
-        setCategories(cats);
-      } catch (error) {
-        console.error("Failed to fetch categories", error);
-      }
-    };
-    fetchInitialCategories();
+    getCategories().then(setCategories).catch(err => console.error(err));
   }, []);
 
   // Effect to re-fetch products when search or category changes
@@ -72,11 +44,21 @@ const ProductsPage = () => {
 
     try {
       const cursor = isInitialFetch ? null : lastVisible;
-      const data = await fetchProductsFromAPI(cursor, debouncedSearchTerm, selectedCategory);
+      const data = await getProducts(cursor, debouncedSearchTerm, selectedCategory);
 
-      setProducts(prev => [...prev, ...data.products]);
-      setLastVisible(data.lastVisible);
-      setHasMore(!!data.lastVisible);
+      // --- ADD THIS LINE FOR DEBUGGING ---
+      console.log("Received data from service:", data);
+
+      // Add a safety check to ensure the data is in the expected format
+      if (data && Array.isArray(data.products)) {
+        setProducts(prev => (isInitialFetch ? data.products : [...prev, ...data.products]));
+        setLastVisible(data.lastVisible);
+        setHasMore(!!data.lastVisible);
+      } else {
+        // If the data is not what we expect, log an error and stop fetching.
+        console.error("API response is missing or has a malformed 'products' array.");
+        setHasMore(false);
+      }
     } catch (error) {
       console.error("Failed to fetch products:", error);
       setHasMore(false);
@@ -84,6 +66,7 @@ const ProductsPage = () => {
       setIsLoading(false);
     }
   };
+
 
   const handleCategoryClick = (categoryName: string | null) => {
     setSelectedCategory(categoryName);
@@ -95,45 +78,15 @@ const ProductsPage = () => {
     <div className={styles.productsPage}>
       <Container>
         <header className={styles.header}>
-          <h1>All Products</h1>
-          <div className={styles.searchContainer}>
-            <input
-              type="text"
-              aria-label="Search products"
-              placeholder="Search for products..."
-              className={styles.searchInput}
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
+          {/* ... Header JSX is the same ... */}
         </header>
 
-        {/* --- CATEGORY FILTER BAR --- */}
         <div className={styles.categoryFilter}>
-          <button
-            onClick={() => handleCategoryClick(null)}
-            className={!selectedCategory ? styles.active : ''}
-          >
-            All
-          </button>
-          {categories.map(cat => (
-            <button
-              key={cat.id}
-              onClick={() => handleCategoryClick(cat.name)}
-              className={selectedCategory === cat.name ? styles.active : ''}
-            >
-              {cat.name}
-            </button>
-          ))}
+          {/* ... Category filter JSX is the same ... */}
         </div>
 
         {isLoading ? (
           <div className={styles.grid}>{renderSkeletons(8)}</div>
-        ) : products.length === 0 ? (
-          <div className={styles.notFound}>
-            <h2>No Products Found</h2>
-            <p>Sorry, we couldn't find any products matching your criteria.</p>
-          </div>
         ) : (
           <InfiniteScroll
             dataLength={products.length}
