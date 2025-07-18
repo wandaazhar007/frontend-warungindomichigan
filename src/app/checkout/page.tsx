@@ -1,165 +1,3 @@
-// 'use client';
-
-// import { useState, useEffect } from 'react';
-// import toast from 'react-hot-toast';
-// import { useCart } from '@/context/CartContext';
-// import { useAuthStatus } from '@/hooks/useAuthStatus';
-// import Container from '@/components/Container/Container';
-// import styles from './CheckoutPage.module.scss';
-// import Image from 'next/image';
-// import Link from 'next/link';
-// import { getShippingRates, ShippingRate } from '@/services/shippingService';
-
-// const CheckoutPage = () => {
-//   const { cartItems, cartTotal } = useCart();
-//   const { user } = useAuthStatus();
-
-//   const [formData, setFormData] = useState({
-//     email: '', firstName: '', lastName: '', address: '', apartment: '',
-//     city: '', state: '', zipCode: '', country: 'US', phone: '',
-//   });
-
-//   const [shippingRates, setShippingRates] = useState<ShippingRate[]>([]);
-//   const [selectedRate, setSelectedRate] = useState<ShippingRate | null>(null);
-//   const [isLoadingRates, setIsLoadingRates] = useState(false);
-//   const [isAddressSubmitted, setIsAddressSubmitted] = useState(false);
-
-//   useEffect(() => {
-//     if (user) {
-//       setFormData(prev => ({
-//         ...prev, email: user.email || '',
-//         firstName: user.displayName?.split(' ')[0] || '',
-//         lastName: user.displayName?.split(' ').slice(1).join(' ') || '',
-//       }));
-//     }
-//   }, [user]);
-
-//   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     setFormData({ ...formData, [e.target.name]: e.target.value });
-//   };
-
-//   const handleAddressSubmit = async (e: React.FormEvent) => {
-//     e.preventDefault();
-//     setIsLoadingRates(true);
-//     setShippingRates([]);
-//     setSelectedRate(null);
-
-//     try {
-//       const addressData = {
-//         name: `${formData.firstName} ${formData.lastName}`,
-//         street1: formData.address,
-//         city: formData.city,
-//         state: formData.state,
-//         zip: formData.zipCode,
-//         country: formData.country,
-//         email: formData.email,
-//       };
-//       const rates = await getShippingRates(addressData);
-//       setShippingRates(rates);
-//       setIsAddressSubmitted(true); // Show the next step
-//       toast.success("Shipping options loaded!");
-//     } catch (error) {
-//       toast.error("Could not get shipping rates. Please check your address.");
-//     } finally {
-//       setIsLoadingRates(false);
-//     }
-//   };
-
-//   if (cartItems.length === 0) {
-//     return (
-//       <div className={styles.emptyCartMessage}>
-//         <h2>Your cart is empty</h2>
-//         <Link href="/products" className={styles.ctaButton}>Continue Shopping</Link>
-//       </div>
-//     )
-//   }
-
-//   // Calculate final total
-//   const shippingCost = selectedRate ? parseFloat(selectedRate.amount) * 100 : 0;
-//   const finalTotal = cartTotal + shippingCost;
-
-//   return (
-//     <div className={styles.checkoutPage}>
-//       <Container>
-//         <div className={styles.grid}>
-//           <div className={styles.formContainer}>
-//             {/* --- Address Form --- */}
-//             <form onSubmit={handleAddressSubmit}>
-//               <h2>Contact Information</h2>
-//               <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required className={styles.inputField} />
-//               <h2 className={styles.formHeading}>Shipping Address</h2>
-//               <div className={styles.nameFields}>
-//                 <input type="text" name="firstName" placeholder="First name" value={formData.firstName} onChange={handleChange} required className={styles.inputField} />
-//                 <input type="text" name="lastName" placeholder="Last name" value={formData.lastName} onChange={handleChange} required className={styles.inputField} />
-//               </div>
-//               <input type="text" name="address" placeholder="Address" value={formData.address} onChange={handleChange} required className={styles.inputField} />
-//               <input type="text" name="apartment" placeholder="Apartment, suite, etc. (optional)" value={formData.apartment} onChange={handleChange} className={styles.inputField} />
-//               <div className={styles.addressFields}>
-//                 <input type="text" name="city" placeholder="City" value={formData.city} onChange={handleChange} required className={styles.inputField} />
-//                 <input type="text" name="state" placeholder="State" value={formData.state} onChange={handleChange} required className={styles.inputField} />
-//                 <input type="text" name="zipCode" placeholder="ZIP code" value={formData.zipCode} onChange={handleChange} required className={styles.inputField} />
-//               </div>
-//               <input type="tel" name="phone" placeholder="Phone (for delivery updates)" value={formData.phone} onChange={handleChange} required className={styles.inputField} />
-//               <button type="submit" className={styles.submitButton} disabled={isLoadingRates}>
-//                 {isLoadingRates ? 'Getting Rates...' : 'Continue to Shipping'}
-//               </button>
-//             </form>
-
-//             {/* --- Shipping Options (shown after address is submitted) --- */}
-//             {isAddressSubmitted && (
-//               <div className={styles.shippingSection}>
-//                 <hr className={styles.sectionDivider} />
-//                 <h2>Shipping Method</h2>
-//                 {shippingRates.length > 0 ? shippingRates.map(rate => (
-//                   <label key={rate.object_id} className={styles.rateLabel}>
-//                     <input type="radio" name="shippingRate" onChange={() => setSelectedRate(rate)} checked={selectedRate?.object_id === rate.object_id} />
-//                     <div className={styles.rateDetails}>
-//                       <span>{rate.provider} {rate.servicelevel.name}</span>
-//                       <small>{rate.duration_terms}</small>
-//                     </div>
-//                     <span className={styles.ratePrice}>${rate.amount}</span>
-//                   </label>
-//                 )) : <p>No shipping options available for this address.</p>}
-//               </div>
-//             )}
-//             {/* --- Payment Section (placeholder) --- */}
-//             {selectedRate && (
-//               <div className={styles.paymentSection}>
-//                 <hr className={styles.sectionDivider} />
-//                 <h2>Payment</h2>
-//                 <p>All transactions are secure and encrypted.</p>
-//                 {/* Stripe payment element will go here */}
-//                 <div className={styles.paymentPlaceholder}>Stripe Payment Form</div>
-//                 <button className={styles.submitButton}>Pay Now</button>
-//               </div>
-//             )}
-//           </div>
-
-//           {/* --- Order Summary (Right Side) --- */}
-//           <div className={styles.summaryContainer}>
-//             {cartItems.map(item => (
-//               <div key={item.id} className={styles.summaryItem}>
-//                 <div className={styles.summaryItemImage}><Image src={item.imageUrl || '/placeholder.png'} alt={item.name} width={64} height={64} /><span className={styles.summaryItemQuantity}>{item.quantity}</span></div>
-//                 <div className={styles.summaryItemDetails}><h4>{item.name}</h4></div>
-//                 <div className={styles.summaryItemPrice}>${((item.price * item.quantity) / 100).toFixed(2)}</div>
-//               </div>
-//             ))}
-//             <hr className={styles.divider} />
-//             <div className={styles.summaryRow}><span>Subtotal</span><span>${(cartTotal / 100).toFixed(2)}</span></div>
-//             <div className={styles.summaryRow}><span>Shipping</span><span>{selectedRate ? `$${selectedRate.amount}` : '-'}</span></div>
-//             <hr className={styles.divider} />
-//             <div className={`${styles.summaryRow} ${styles.totalRow}`}><span>Total</span><strong>${(finalTotal / 100).toFixed(2)}</strong></div>
-//           </div>
-//         </div>
-//       </Container>
-//     </div>
-//   );
-// };
-
-// export default CheckoutPage;
-
-
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -228,7 +66,8 @@ const CheckoutPage = () => {
   const [selectedRate, setSelectedRate] = useState<ShippingRate | null>(null);
   const [isLoadingRates, setIsLoadingRates] = useState(false);
   const [isAddressSubmitted, setIsAddressSubmitted] = useState(false);
-
+  const [checkoutStep, setCheckoutStep] = useState('information');
+  const [clicked, setClicked] = useState(true);
   // Load form data from localStorage on initial render
   useEffect(() => {
     const savedAddress = localStorage.getItem('shippingAddress');
@@ -255,6 +94,7 @@ const CheckoutPage = () => {
   }, [user]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setClicked(true);
     setFormData({ ...formData, [e.target.name]: e.target.value });
     if (errors[e.target.name as keyof FormErrors]) {
       setErrors({ ...errors, [e.target.name]: undefined });
@@ -275,12 +115,13 @@ const CheckoutPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleAddressSubmit = async (e: React.FormEvent) => {
+  const handleContinueToShipping = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) {
       toast.error("Please fix the errors before continuing.");
       return;
     }
+
     setIsLoadingRates(true);
     setShippingRates([]);
     setSelectedRate(null);
@@ -293,12 +134,13 @@ const CheckoutPage = () => {
         state: formData.state,
         zip: formData.zipCode,
         country: formData.country,
-        email: formData.email,
       };
       const rates = await getShippingRates(addressData);
       setShippingRates(rates);
       setIsAddressSubmitted(true);
+      setCheckoutStep('shipping'); // <-- Move to the next step
       toast.success("Shipping options loaded!");
+      setClicked(false);
     } catch (error) {
       toast.error("Could not get shipping rates. Please check your address.");
     } finally {
@@ -325,8 +167,7 @@ const CheckoutPage = () => {
           <h1 className={styles.logo}>WarungIndoMichigan.com</h1>
           <nav className={styles.breadcrumbs}>
             <Link href="/cart">Cart</Link> <FontAwesomeIcon icon={faChevronRight} />
-            <span className={styles.active}>Information</span> <FontAwesomeIcon icon={faChevronRight} />
-            <span>Shipping</span> <FontAwesomeIcon icon={faChevronRight} />
+            <span className={styles.active}>Shipping</span> <FontAwesomeIcon icon={faChevronRight} />
             <span>Payment</span>
           </nav>
 
@@ -339,7 +180,7 @@ const CheckoutPage = () => {
             {errors.email && <p className={styles.errorMessage}>{errors.email}</p>}
           </div>
 
-          <form onSubmit={handleAddressSubmit}>
+          <form onSubmit={handleContinueToShipping}>
             <h2 className={styles.formHeading}>Shipping address</h2>
             <div className={styles.inputGroup}>
               <select name="country" value={formData.country} onChange={handleChange} className={styles.inputField}><option value="US">United States</option></select>
@@ -362,16 +203,11 @@ const CheckoutPage = () => {
               <input type="text" name="apartment" placeholder="Apartment, suite, etc. (optional)" value={formData.apartment} onChange={handleChange} className={styles.inputField} />
               {errors.address && <p className={styles.errorMessage}>{errors.address}</p>}
             </div>
-
-
-
-
             <div className={styles.addressFields}>
               <div className={styles.inputGroup}>
                 <input type="text" name="city" placeholder="City" value={formData.city} onChange={handleChange} className={`${styles.inputField} ${errors.city ? styles.errorInput : ''}`} />
                 {errors.city && <p className={styles.errorMessage}>{errors.city}</p>}
               </div>
-
               <div className={styles.inputGroup}>
                 <select name="state" value={formData.state} onChange={handleChange} className={styles.inputField} >
                   <option value="" disabled>State</option>
@@ -395,13 +231,50 @@ const CheckoutPage = () => {
             </div>
             <div className={styles.formFooter}>
               <Link href="/cart" className={styles.returnLink}>&larr; Return to cart</Link>
-              <button type="submit" className={styles.submitButton} disabled={isLoadingRates}>
-                {isLoadingRates ? 'Loading...' : 'Continue to shipping'}
-              </button>
+              {/* { clicked ? (
+
+              ) : (
+
+              )} */}
+              {clicked && (
+                <button type="submit" className={styles.submitButton} disabled={isLoadingRates}>
+                  {isLoadingRates ? 'Loading...' : 'Load Shipping'}
+                </button>
+              )}
             </div>
           </form>
+
+          {/* --- Shipping Options (shown after address is submitted) --- */}
+          {isAddressSubmitted && (
+            <div className={styles.shippingSection}>
+              <hr className={styles.sectionDivider} />
+              <h2>Select Shipping Method</h2>
+              {shippingRates.length > 0 ? shippingRates.map(rate => (
+                <label key={rate.object_id} className={styles.rateLabel}>
+                  <input type="radio" name="shippingRate" onChange={() => setSelectedRate(rate)} checked={selectedRate?.object_id === rate.object_id} />
+                  <div className={styles.rateDetails}>
+                    <span>{rate.provider} {rate.servicelevel.name}</span>
+                    <small>{rate.duration_terms}</small>
+                  </div>
+                  <span className={styles.ratePrice}>${rate.amount}</span>
+                </label>
+              )) : <p>No shipping options available for this address.</p>}
+            </div>
+          )}
+          {/* --- Payment Section (placeholder) --- */}
+          {selectedRate && (
+            <div className={styles.paymentSection}>
+              <hr className={styles.sectionDivider} />
+              <h2>Payment</h2>
+              <p>All transactions are secure and encrypted.</p>
+              {/* Stripe payment element will go here */}
+              <div className={styles.paymentPlaceholder}>Stripe Payment Form</div>
+              <button className={styles.submitButton}>Continue to payment</button>
+            </div>
+          )}
         </Container>
       </div>
+
       <div className={styles.summaryContainer}>
         {cartItems.map(item => (
           <div key={item.id} className={styles.summaryItem}>
