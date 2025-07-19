@@ -7,8 +7,6 @@ import ProductCard from '@/components/ProductCard/ProductCard';
 import SkeletonCard from '@/components/SkeletonCard/SkeletonCard';
 import { useDebounce } from '@/hooks/useDebounce';
 import { getCategories, Category } from '@/services/categoryService';
-// --- THIS IS THE KEY CHANGE ---
-// We now import getProducts from our service and remove the local fetch function
 import { getProducts } from '@/services/productService';
 import { Product } from '@/types/product';
 import styles from './Products.module.scss';
@@ -25,12 +23,10 @@ const ProductsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-  // Effect to fetch categories (no change here)
   useEffect(() => {
     getCategories().then(setCategories).catch(err => console.error(err));
   }, []);
 
-  // Effect to re-fetch products when search or category changes
   useEffect(() => {
     setIsLoading(true);
     setProducts([]);
@@ -45,11 +41,6 @@ const ProductsPage = () => {
     try {
       const cursor = isInitialFetch ? null : lastVisible;
       const data = await getProducts(cursor, debouncedSearchTerm, selectedCategory);
-
-      // --- ADD THIS LINE FOR DEBUGGING ---
-      console.log("Received data from service:", data);
-
-      // Add a safety check to ensure the data is in the expected format
       if (data && Array.isArray(data.products)) {
         setProducts(prev => (isInitialFetch ? data.products : [...prev, ...data.products]));
         setLastVisible(data.lastVisible);
@@ -78,11 +69,36 @@ const ProductsPage = () => {
     <div className={styles.productsPage}>
       <Container>
         <header className={styles.header}>
-          {/* ... Header JSX is the same ... */}
+          <h1>All Products</h1>
+          <div className={styles.searchContainer}>
+            <input
+              type="text"
+              aria-label="Search products"
+              placeholder="Search for products..."
+              className={styles.searchInput}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
         </header>
 
+        {/* --- CATEGORY FILTER BAR --- */}
         <div className={styles.categoryFilter}>
-          {/* ... Category filter JSX is the same ... */}
+          <button
+            onClick={() => handleCategoryClick(null)}
+            className={!selectedCategory ? styles.active : ''}
+          >
+            All
+          </button>
+          {categories.map(cat => (
+            <button
+              key={cat.id}
+              onClick={() => handleCategoryClick(cat.name)}
+              className={selectedCategory === cat.name ? styles.active : ''}
+            >
+              {cat.name}
+            </button>
+          ))}
         </div>
 
         {isLoading ? (
