@@ -53,6 +53,9 @@ $breakpoint-tablet: 768px;
   display: flex;
   align-items: center;
   gap: 2rem; // 20px
+  align-items: center;
+  // justify-content: center;
+  // border: .5rem solid salmon;
 }
 
 .actionButton {
@@ -60,6 +63,7 @@ $breakpoint-tablet: 768px;
   font-size: 1.8rem; // 18px
   color: #333;
   transition: color 0.2s;
+  border: none;
 
   &:hover {
     color: #0070f3;
@@ -127,5 +131,42 @@ $breakpoint-tablet: 768px;
     color: #333;
     text-decoration: none;
     font-weight: 600;
+  }
+}
+
+.userName {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.mobileLogoutButton {
+  font-size: 2.4rem;
+  color: #dc3545;
+  text-decoration: none;
+  font-weight: 600;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+// --- ADD THIS NEW CLASS ---
+.mobileAuthLinks {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+
+  a {
+    font-size: 2.4rem;
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  span {
+    font-size: 2rem;
+    color: #ccc;
   }
 }
