@@ -503,45 +503,49 @@ const CheckoutPage = () => {
               {!user && <Link href="/login" className={styles.loginLink}>Log in</Link>}
             </div>
             <div className={styles.inputGroup}>
-              <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} className={`${styles.inputField} ${errors.email ? styles.errorInput : ''}`} required />
+              <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} className={`${styles.inputField} ${errors.email ? styles.errorInput : ''}`} />
               {errors.email && <p className={styles.errorMessage}>{errors.email}</p>}
             </div>
             <form onSubmit={handleContinueToShipping}>
               <h2 className={styles.formHeading}>Shipping address</h2>
-              <select name="country" value={formData.country} onChange={handleChange} className={styles.inputField}><option value="US">United States</option></select>
+              <div className={styles.inputGroup}>
+                <select name="country" value={formData.country} onChange={handleChange} className={styles.inputField}><option value="US">United States</option></select>
+              </div>
               <div className={styles.nameFields}>
                 <div className={styles.inputGroup}>
-                  <input type="text" name="firstName" placeholder="First name" value={formData.firstName} onChange={handleChange} className={`${styles.inputField} ${errors.firstName ? styles.errorInput : ''}`} required />
+                  <input type="text" name="firstName" placeholder="First name" value={formData.firstName} onChange={handleChange} className={`${styles.inputField} ${errors.firstName ? styles.errorInput : ''}`} />
                   {errors.firstName && <p className={styles.errorMessage}>{errors.firstName}</p>}
                 </div>
                 <div className={styles.inputGroup}>
-                  <input type="text" name="lastName" placeholder="Last name" value={formData.lastName} onChange={handleChange} className={`${styles.inputField} ${errors.lastName ? styles.errorInput : ''}`} required />
+                  <input type="text" name="lastName" placeholder="Last name" value={formData.lastName} onChange={handleChange} className={`${styles.inputField} ${errors.lastName ? styles.errorInput : ''}`} />
                   {errors.lastName && <p className={styles.errorMessage}>{errors.lastName}</p>}
                 </div>
               </div>
               <div className={styles.inputGroup}>
-                <input type="text" name="address" placeholder="Address" value={formData.address} onChange={handleChange} className={`${styles.inputField} ${errors.address ? styles.errorInput : ''}`} required />
+                <input type="text" name="address" placeholder="Address" value={formData.address} onChange={handleChange} className={`${styles.inputField} ${errors.address ? styles.errorInput : ''}`} />
                 {errors.address && <p className={styles.errorMessage}>{errors.address}</p>}
               </div>
-              <input type="text" name="apartment" placeholder="Apartment, suite, etc. (optional)" value={formData.apartment} onChange={handleChange} className={styles.inputField} />
+              <div className={styles.inputGroup}>
+                <input type="text" name="apartment" placeholder="Apartment, suite, etc. (optional)" value={formData.apartment} onChange={handleChange} className={styles.inputField} />
+              </div>
               <div className={styles.addressFields}>
                 <div className={styles.inputGroup}>
-                  <input type="text" name="city" placeholder="City" value={formData.city} onChange={handleChange} className={`${styles.inputField} ${errors.city ? styles.errorInput : ''}`} required />
+                  <input type="text" name="city" placeholder="City" value={formData.city} onChange={handleChange} className={`${styles.inputField} ${errors.city ? styles.errorInput : ''}`} />
                   {errors.city && <p className={styles.errorMessage}>{errors.city}</p>}
                 </div>
                 <div className={styles.inputGroup}>
-                  <select name="state" value={formData.state} onChange={handleChange} className={styles.inputField} required>
+                  <select name="state" value={formData.state} onChange={handleChange} className={styles.inputField}>
                     <option value="" disabled>State</option>
                     {usStates.map(state => (<option key={state.abbreviation} value={state.abbreviation}>{state.name}</option>))}
                   </select>
                 </div>
                 <div className={styles.inputGroup}>
-                  <input type="text" name="zipCode" placeholder="ZIP code" value={formData.zipCode} onChange={handleChange} className={`${styles.inputField} ${errors.zipCode ? styles.errorInput : ''}`} required />
+                  <input type="text" name="zipCode" placeholder="ZIP code" value={formData.zipCode} onChange={handleChange} className={`${styles.inputField} ${errors.zipCode ? styles.errorInput : ''}`} />
                   {errors.zipCode && <p className={styles.errorMessage}>{errors.zipCode}</p>}
                 </div>
               </div>
               <div className={styles.inputGroup}>
-                <input type="tel" name="phone" placeholder="Phone" value={formData.phone} onChange={handleChange} className={`${styles.inputField} ${errors.phone ? styles.errorInput : ''}`} required />
+                <input type="tel" name="phone" placeholder="Phone" value={formData.phone} onChange={handleChange} className={`${styles.inputField} ${errors.phone ? styles.errorInput : ''}`} />
                 {errors.phone && <p className={styles.errorMessage}>{errors.phone}</p>}
               </div>
               <div className={styles.formFooter}>
