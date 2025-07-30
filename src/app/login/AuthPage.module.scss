@@ -132,3 +132,25 @@
   text-align: left;
   margin-top: -1rem;
 }
+
+.inputGroup {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+// --- ADD THESE NEW STYLES ---
+.passwordWrapper {
+  position: relative;
+}
+
+.passwordToggle {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #aaa;
+  font-size: 1.6rem;
+}

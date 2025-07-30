@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle, faApple } from '@fortawesome/free-brands-svg-icons';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faEye, faEyeSlash, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Container from '@/components/Container/Container';
 import styles from '../login/AuthPage.module.scss';
 import { signUpWithEmail, signInWithGoogle } from '@/services/authService';
@@ -15,14 +15,18 @@ interface FormErrors {
   fullName?: string;
   email?: string;
   password?: string;
+  confirmPassword?: string;
 }
 
 const SignupPage = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();
 
 
@@ -32,6 +36,10 @@ const SignupPage = () => {
     if (!email) newErrors.email = 'Email is required.';
     if (!password) newErrors.password = 'Password is required.';
     else if (password.length < 6) newErrors.password = 'Password must be at least 6 characters.';
+
+    // --- NEW VALIDATION LOGIC ---
+    if (!confirmPassword) newErrors.confirmPassword = 'Please re-enter your password.';
+    else if (password !== confirmPassword) newErrors.confirmPassword = 'Passwords do not match.';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -79,9 +87,9 @@ const SignupPage = () => {
             <button onClick={handleGoogleSignIn} className={styles.socialButton}>
               <FontAwesomeIcon icon={faGoogle} /> Sign up with Google
             </button>
-            <button className={styles.socialButton}>
+            {/* <button className={styles.socialButton}>
               <FontAwesomeIcon icon={faApple} /> Sign up with Apple
-            </button>
+            </button> */}
           </div>
 
           <div className={styles.divider}><span>OR</span></div>
@@ -95,9 +103,24 @@ const SignupPage = () => {
               <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className={errors.email ? styles.errorInput : ''} />
               {errors.email && <p className={styles.errorMessage}>{errors.email}</p>}
             </div>
-            <div className={styles.inputGroup}>
+            {/* <div className={styles.inputGroup}>
               <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className={errors.password ? styles.errorInput : ''} />
               {errors.password && <p className={styles.errorMessage}>{errors.password}</p>}
+            </div> */}
+
+            <div className={`${styles.inputGroup} ${styles.passwordWrapper}`}>
+              <input type={showPassword ? 'text' : 'password'} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className={errors.password ? styles.errorInput : ''} />
+              <button type="button" className={styles.passwordToggle} onClick={() => setShowPassword(!showPassword)}>
+                <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+              </button>
+              {errors.password && <p className={styles.errorMessage}>{errors.password}</p>}
+            </div>
+            <div className={`${styles.inputGroup} ${styles.passwordWrapper}`}>
+              <input type={showConfirmPassword ? 'text' : 'password'} placeholder="Re-enter password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className={errors.confirmPassword ? styles.errorInput : ''} />
+              <button type="button" className={styles.passwordToggle} onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                <FontAwesomeIcon icon={showConfirmPassword ? faEyeSlash : faEye} />
+              </button>
+              {errors.confirmPassword && <p className={styles.errorMessage}>{errors.confirmPassword}</p>}
             </div>
             <button type="submit" className={styles.submitButton} disabled={isLoading}>
               {isLoading ? <FontAwesomeIcon icon={faSpinner} spin /> : 'Create Account'}

@@ -228,7 +228,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle, faApple } from '@fortawesome/free-brands-svg-icons';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Container from '@/components/Container/Container';
 import styles from './AuthPage.module.scss';
@@ -317,9 +317,9 @@ const LoginPage = () => {
             <button onClick={handleGoogleSignIn} className={styles.socialButton}>
               <FontAwesomeIcon icon={faGoogle} /> Sign in with Google
             </button>
-            <button className={styles.socialButton}>
+            {/* <button className={styles.socialButton}>
               <FontAwesomeIcon icon={faApple} /> Sign in with Apple
-            </button>
+            </button> */}
           </div>
 
           <div className={styles.divider}><span>OR</span></div>
