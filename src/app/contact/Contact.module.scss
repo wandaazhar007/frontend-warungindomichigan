@@ -131,3 +131,14 @@ $breakpoint-desktop: 1024px;
   margin-top: 2rem;
   border: 1px solid #eaeaea;
 }
+
+.errorMessage {
+  color: #d93a3a;
+  font-size: 1.2rem;
+  text-align: left;
+  margin-top: .5rem;
+}
+
+.errorInput {
+  border-color: #d93a3a !important; // Add a red border for errors
+}
