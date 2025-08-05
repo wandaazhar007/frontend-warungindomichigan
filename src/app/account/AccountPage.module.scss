@@ -1,0 +1,61 @@
+.accountPage {
+  padding: 4rem 0;
+
+  h1 {
+    font-size: 3.6rem;
+    margin-bottom: 1rem;
+  }
+
+  >p {
+    font-size: 1.8rem;
+    color: #666;
+    margin-bottom: 4rem;
+  }
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+
+.historySection {
+  h2 {
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 1rem;
+  }
+}
+
+.ordersList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.orderCard {
+  background-color: #f9f9f9;
+  border: 1px solid #eaeaea;
+  border-radius: 0.8rem;
+}
+
+.orderHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background-color: #f1f1f1;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.orderBody {
+  padding: 1.5rem;
+  font-size: 1.6rem;
+
+  p {
+    margin: 0 0 0.5rem 0;
+  }
+}
