@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
 import toast from 'react-hot-toast';
 
 export interface CartItem {
@@ -47,7 +47,21 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem('cart', JSON.stringify(cartItems));
   }, [cartItems]);
 
-  const addToCart = (item: Omit<CartItem, 'quantity'>, quantity: number) => {
+  // const addToCart = (item: Omit<CartItem, 'quantity'>, quantity: number) => {
+  //   setCartItems(prevItems => {
+  //     const existingItem = prevItems.find(i => i.id === item.id);
+  //     if (existingItem) {
+  //       return prevItems.map(i =>
+  //         i.id === item.id ? { ...i, quantity: i.quantity + quantity } : i
+  //       );
+  //     }
+  //     return [...prevItems, { ...item, quantity }];
+  //   });
+  //   toast.success(`${quantity} x ${item.name} added to cart!`);
+  // };
+
+  // Wrap functions in useCallback to prevent them from being recreated on every render
+  const addToCart = useCallback((item: Omit<CartItem, 'quantity'>, quantity: number) => {
     setCartItems(prevItems => {
       const existingItem = prevItems.find(i => i.id === item.id);
       if (existingItem) {
@@ -58,7 +72,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       return [...prevItems, { ...item, quantity }];
     });
     toast.success(`${quantity} x ${item.name} added to cart!`);
-  };
+  }, []);
 
   const removeFromCart = (itemId: string) => {
     setCartItems(prevItems => prevItems.filter(item => item.id !== itemId));

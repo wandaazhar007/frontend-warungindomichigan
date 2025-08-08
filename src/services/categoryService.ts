@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // The base URL of our backend API
-const API_URL = 'http://192.168.0.52:8080/api/categories';
+const API_URL = 'http://localhost:8080/api/categories';
 
 // Define the shape of a Category object
 export interface Category {
