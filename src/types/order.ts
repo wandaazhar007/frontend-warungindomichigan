@@ -1,12 +1,4 @@
-// Defines the shape of a single item within an order
-export interface OrderItem {
-  productId: string;
-  name: string;
-  price: number;
-  quantity: number;
-}
-
-// Defines the shape of the shipping address
+// Defines the shape of the shipping address object
 export interface ShippingAddress {
   street: string;
   city: string;
@@ -23,6 +15,14 @@ export interface CustomerDetails {
   shippingAddress?: ShippingAddress;
 }
 
+// Defines the shape of a single item within an order
+export interface OrderItem {
+  productId: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
 // This is the main interface for a complete Order object from our backend
 export interface Order {
   id: string;
@@ -35,7 +35,7 @@ export interface Order {
   paymentMethod?: string;
   orderStatus: 'Pending' | 'Processing' | 'Shipped' | 'Delivered' | 'Cancelled';
   paymentStatus: 'Unpaid' | 'Paid' | 'Failed';
-  // Handle both Firestore timestamp and regular Date objects
+  // Handle both Firestore timestamp and regular Date objects for createdAt
   createdAt: {
     _seconds: number;
     _nanoseconds: number;

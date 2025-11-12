@@ -18,7 +18,6 @@ interface ApiResponse {
 
 /**
  * Fetches the order history for the currently logged-in user.
- * This is for the "My Account" page.
  */
 export const getMyOrders = async (lastVisible: string | null = null): Promise<PaginatedOrdersResponse> => {
   const token = await getIdToken();

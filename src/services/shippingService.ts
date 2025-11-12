@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'http://192.168.0.52:8080/api/shipping';
+const API_URL = 'http://localhost:8080/api/shipping';
+// const API_URL = 'http://192.168.0.52:8080/api/shipping';
 
 // Define the shape of a single shipping rate object from Shippo
 export interface ShippingRate {
